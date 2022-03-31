@@ -1,9 +1,11 @@
 import React from "react";
 import "./Cart.css";
 
-const Cart = ({ cart }) => {
+const Cart = (props) => {
+  console.log(props);
   //   const { price, shipping } = cart;
   //   console.log(cart);
+  const {cart, children} = props
 
   let total = 0;
   let shipping = 0;
@@ -27,6 +29,7 @@ const Cart = ({ cart }) => {
       <p>Total Shipping: ${shipping}</p>
       <p>Tax: ${tex}</p>
       <h5>Grand Total: ${grandTotal.toFixed(2)}</h5>
+      {children}
     </div>
   );
 };
