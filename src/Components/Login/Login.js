@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
 import img from "../../images/google.svg";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -10,6 +10,9 @@ const Login = () => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
+  const location = useLocation()
+
+  const from = location?.state?.form?.pathname || '/'
 
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -19,19 +22,12 @@ const Login = () => {
   };
   if (user) {
       console.log('done');
-    navigate("/shop");
+    navigate(from, {replace: true});
   }
   const handleUserSignIn = (event) => {
     event.preventDefault();
     signInWithEmailAndPassword(email, password);
   };
-  //   if (error) {
-  //     return (
-  //       <div>
-  //         <p>Error: {error.message}</p>
-  //       </div>
-  //     );
-  //   }
   return (
     <div className="form-container">
       <div>
